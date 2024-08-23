@@ -125,3 +125,28 @@ function GenerateQuadsBalls(atlas)
 
     return quads
 end
+
+function GenerateQuadsPowers(atlas)
+    local x = 128
+    local y = 192
+
+    local quads = {}
+
+    quads[1] = love.graphics.newQuad(x, y, 16, 16,
+        atlas:getDimensions())
+
+    quads[2] = love.graphics.newQuad(x + 16, y, 16, 16,
+        atlas:getDimensions())
+
+    return quads
+end
+
+function GenerateQuadsLockBrick(atlas)
+  local x = 159
+  local y = 48
+
+  local quad = love.graphics.newQuad(x, y, 33, 16,
+      atlas:getDimensions())
+
+  return quad
+end

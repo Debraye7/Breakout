@@ -40,6 +40,8 @@ function Paddle:init(skin)
     -- the variant is which of the four paddle sizes we currently are; 2
     -- is the starting size, as the smallest is too tough to start with
     self.size = 2
+
+    self.score = 0
 end
 
 function Paddle:update(dt)
@@ -73,5 +75,19 @@ end
 ]]
 function Paddle:render()
     love.graphics.draw(gTextures['main'], gFrames['paddles'][self.size + 4 * (self.skin - 1)],
-        self.x, self.y)
+    self.x, self.y)
+end
+
+function Paddle:resize(kind)
+  if kind then
+      if self.size < 4 then
+          self.size = self.size + 1
+          self.width = self.width + 32
+      end
+  else
+    if self.size > 1 then
+      self.size = self.size - 1
+      self.width = self.width - 32
+    end
+  end
 end

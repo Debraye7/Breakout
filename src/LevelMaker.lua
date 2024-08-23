@@ -23,6 +23,8 @@ ALTERNATE = 2       -- alternate colors
 SKIP = 3            -- skip every other block
 NONE = 4            -- no blocks this row
 
+topPadding = 16
+
 LevelMaker = Class{}
 
 --[[
@@ -34,7 +36,11 @@ function LevelMaker.createMap(level)
     local bricks = {}
 
     -- randomly choose the number of rows
+    
     local numRows = math.random(1, 5)
+    if level % 2 == 0 then
+        numRows = math.random(1, 3)
+    end
 
     -- randomly choose the number of columns, ensuring odd
     local numCols = math.random(7, 13)
@@ -71,6 +77,10 @@ function LevelMaker.createMap(level)
         local solidColor = math.random(1, highestColor)
         local solidTier = math.random(0, highestTier)
 
+        if level % 2 == 0 then
+          topPadding = 35
+        end
+
         for x = 1, numCols do
             -- if skipping is turned on and we're on a skip iteration...
             if skipPattern and skipFlag then
@@ -92,7 +102,7 @@ function LevelMaker.createMap(level)
                 + (13 - numCols) * 16,  -- left-side padding for when there are fewer than 13 columns
                 
                 -- y-coordinate
-                y * 16                  -- just use y * 16, since we need top padding anyway
+                y * topPadding                  -- just use y * 16, since we need top padding anyway
             )
 
             -- if we're alternating, figure out which color/tier we're on

@@ -47,3 +47,6 @@ require 'src/states/PlayState'
 require 'src/states/ServeState'
 require 'src/states/StartState'
 require 'src/states/VictoryState'
+
+require 'src/Power'
+require 'src/Lock'

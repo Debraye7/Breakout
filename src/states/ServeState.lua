@@ -27,8 +27,8 @@ function ServeState:enter(params)
     self.recoverPoints = params.recoverPoints
 
     -- init new ball (random color for fun)
-    self.ball = Ball()
-    self.ball.skin = math.random(7)
+    -- self.ball.skin = math.random(7)
+    self.ball = Ball(math.random(7))
 end
 
 function ServeState:update(dt)
@@ -36,6 +36,9 @@ function ServeState:update(dt)
     self.paddle:update(dt)
     self.ball.x = self.paddle.x + (self.paddle.width / 2) - 4
     self.ball.y = self.paddle.y - 8
+    self.ball.dx = math.random(-200, 200)
+    self.ball.dy = math.random(-50, -60)
+    self.ball.inPlay = true
 
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
         -- pass in all important state info to the PlayState
@@ -74,4 +77,8 @@ function ServeState:render()
     love.graphics.setFont(gFonts['medium'])
     love.graphics.printf('Press Enter to serve!', 0, VIRTUAL_HEIGHT / 2,
         VIRTUAL_WIDTH, 'center')
+
+    if self.level % 2 == 0 then
+        love.graphics.draw(gTextures['main'], gFrames['lock'], VIRTUAL_WIDTH/2 - 16, VIRTUAL_HEIGHT/2 + 30)
+    end
 end

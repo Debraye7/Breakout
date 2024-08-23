@@ -20,6 +20,8 @@ function Ball:init(skin)
     self.width = 8
     self.height = 8
 
+    self.inPlay = false
+
     -- these variables are for keeping track of our velocity on both the
     -- X and Y axis, since the ball can move in two dimensions
     self.dy = 0
@@ -88,6 +90,16 @@ end
 function Ball:render()
     -- gTexture is our global texture for all blocks
     -- gBallFrames is a table of quads mapping to each individual ball skin in the texture
-    love.graphics.draw(gTextures['main'], gFrames['balls'][self.skin],
-        self.x, self.y)
+    if self.inPlay then
+        love.graphics.draw(gTextures['main'], gFrames['balls'][self.skin],
+            self.x, self.y)
+    end
+end
+
+function Ball:remove()
+    self.inPlay = false
+    self.x = VIRTUAL_WIDTH/2 - 4
+    self.y = VIRTUAL_HEIGHT
+    self.dx = 0
+    self.dy = 0
 end
